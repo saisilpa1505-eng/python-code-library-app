@@ -6,8 +6,6 @@ services:
       - "3306:3306"
     volumes:
       - mydata:/var/lib/mysql/
-    networks:
-      - myapp
     deploy:
       resources:
         reservations:
@@ -21,8 +19,6 @@ services:
     build: ./auth/
     ports:
       - "5001:5001"
-    networks:
-      - myapp
     deploy: 
       resources:
         reservations:
@@ -36,8 +32,6 @@ services:
     build: ./borrow/
     ports:
       - "5002:5002"
-    networks:
-      - myapp
     deploy:
       resources:
         reservations:
@@ -50,8 +44,6 @@ services:
     build: ./book/
     ports:
       - "5003:5003"
-    networks:
-      - myapp
     depends_on:
       - database
 
@@ -59,15 +51,9 @@ services:
     build: ./
     ports:
       - "5000:5000"
-    networks:
-      - myapp
     depends_on:
       - auth_service
       - book_service
       - borrow_service
-
-networks:
-  myapp:
-    driver: overlay
 volumes:
   mydata:
