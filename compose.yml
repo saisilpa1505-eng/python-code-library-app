@@ -1,7 +1,7 @@
 ---
 services:
   database:
-    build: ./database/
+    image: ./database/
     ports:
       - "3306:3306"
     volumes:
@@ -16,7 +16,7 @@ services:
           memory: 200M
 
   auth_service:
-    build: ./auth/
+    image: ./auth/
     ports:
       - "5001:5001"
     deploy: 
@@ -29,7 +29,7 @@ services:
           memory: 200M
 
   borrow_service:
-    build: ./borrow/
+    image: ./borrow/
     ports:
       - "5002:5002"
     deploy:
@@ -41,14 +41,14 @@ services:
           cpus: "0.5"
           memory: 200M
   book_service:
-    build: ./book/
+    image: ./book/
     ports:
       - "5003:5003"
     depends_on:
       - database
 
   frontend:
-    build: ./
+    image: ./
     ports:
       - "5000:5000"
     depends_on:
